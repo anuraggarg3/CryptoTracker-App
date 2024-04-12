@@ -11,25 +11,10 @@ import HomeScreen from './screens/HomeScreen';
 import Loader from './screens/Loader';
 import Newslistscreen from './screens/Newslistscreen';
 import NewsDetailsscreen from './screens/NewsDetailsscreen';
-function DetailsScreens() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details!</Text>
-    </View>
-  );
-}
+import CryptocoinDetailscreen from './screens/CryptocoinDetailscreen';
+import SearchScreen from './screens/SearchScreen';
 
-function SettingsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
+
 
 const HomeStack = createNativeStackNavigator();
 
@@ -37,21 +22,14 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{headerShown:false}}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Details" component={DetailsScreens} />
+      <HomeStack.Screen name="CryptoDetail" component={CryptocoinDetailscreen} />
     </HomeStack.Navigator>
   );
 }
 
 const SettingsStack = createNativeStackNavigator();
 
-function SettingsStackScreen() {
-  return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-      <SettingsStack.Screen name="Details" component={DetailsScreens} />
-    </SettingsStack.Navigator>
-  );
-}
+
 function NewsStackScreen() {
   return (
     <SettingsStack.Navigator screenOptions={{headerShown:false}}>
@@ -86,7 +64,7 @@ export default function App() {
       tabBarInactiveTintColor:'#cba4ff',
       tabBarActiveTintColor: '#FAA034',
        }}
-       initialRouteName='Market'
+      //  initialRouteName='Search'
 >
         <Tab.Screen name="Market" component={HomeStackScreen} 
         options={{
@@ -96,7 +74,7 @@ export default function App() {
           ),
         }}
         />
-        <Tab.Screen name="Search" component={SettingsStackScreen}
+        <Tab.Screen name="Search" component={SearchScreen}
         options={{
           tabBarIcon: ({ color, size ,focused}) => (
             <View style={{

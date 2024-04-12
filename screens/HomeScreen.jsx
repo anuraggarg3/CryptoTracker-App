@@ -4,8 +4,10 @@ import Loader from './Loader';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [coinData, setCoinData] = useState([]);
   const [index, setIndex] = useState(0);
@@ -36,10 +38,12 @@ const HomeScreen = () => {
   const renderItem = ({ item }) => (
     <CoinItem item={item} />
   );
-
+  const detailcoin=(data)=>{
+    navigation.navigate('CryptoDetail',{data:data});
+  }
 
   const CoinItem = ({ item }) => (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={()=>detailcoin(item)} activeOpacity={0.8}>
       <View style={styles.coinInfoContainer}>
         <Image source={{ uri: item.image }} style={styles.coinImage} />
         <View style={styles.coinDetails}>
@@ -63,7 +67,7 @@ const HomeScreen = () => {
         }
       </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   const FirstRoute = () => (
@@ -133,10 +137,10 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: '#6E21D1',
-    marginBottom:5,
+    marginBottom:10,
     borderRadius:15,
     height:50,
-    marginTop:5,
+    marginTop:10,
   },
   tabLabel: {
     fontSize: 12, 

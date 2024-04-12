@@ -29,6 +29,8 @@ const Newslistscreen = () => {
     {isLoading ? (
       <NewsLoader/>
     ) : (<>
+  {/* backgroundColor:'#6E21D1', */}
+
         <View style={{backgroundColor:'#307ABB',padding:10,justifyContent:'center',alignItems:'center'}}><Text style={{color:"white",fontSize:30,fontWeight:'900'}}>News</Text></View>
         <LinearGradient colors={[ '#307ABB', '#5249C7',"#6035CC","#682ACF","#6E21D1"]} 
         style={styles.linearGradient}
