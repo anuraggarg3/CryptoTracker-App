@@ -96,25 +96,22 @@ export default function App() {
           ),
         }}
         />
-        <Tab.Screen name="Watchlist" component={SettingsStackScreen}
+        <Tab.Screen name="Search" component={SettingsStackScreen}
         options={{
           tabBarIcon: ({ color, size ,focused}) => (
-            <MaterialCommunityIcons name="bookmark-multiple" size={24} color={focused ? '#FAA034':'#cba4ff'} />
+            <View style={{
+              position: 'absolute',
+              top: -25, 
+              alignSelf: 'center', 
+              backgroundColor: '#3D1273',
+              paddingHorizontal:15,
+              paddingTop:5,
+              borderTopRightRadius:80,
+              borderTopLeftRadius:80,
+            }}>
+           <Ionicons name="search" size={38} color={focused ? '#FAA034' : '#cba4ff'} />
+           </View>
           ),
-        }}
-        />
-        <Tab.Screen name="Conversion Rate" component={SettingsStackScreen}
-        options={{
-          tabBarIcon: ({ color, size ,focused}) => (
-            <MaterialIcons name="currency-exchange" size={24} color={focused ? '#FAA034':'#cba4ff'} />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <View style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize:14, color: focused ? '#FAA034' : '#cba4ff' }}>
-          Conversion
-        </Text>
-      </View>
-          )
         }}
         />
         <Tab.Screen name="News" component={NewsStackScreen}
