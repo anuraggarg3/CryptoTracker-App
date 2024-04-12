@@ -86,7 +86,7 @@ export default function App() {
       tabBarInactiveTintColor:'#cba4ff',
       tabBarActiveTintColor: '#FAA034',
        }}
-       initialRouteName='News'
+       initialRouteName='Market'
 >
         <Tab.Screen name="Market" component={HomeStackScreen} 
         options={{
