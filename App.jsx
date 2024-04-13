@@ -13,6 +13,7 @@ import Newslistscreen from './screens/Newslistscreen';
 import NewsDetailsscreen from './screens/NewsDetailsscreen';
 import CryptocoinDetailscreen from './screens/CryptocoinDetailscreen';
 import SearchScreen from './screens/SearchScreen';
+import Temp1 from './screens/Temp1';
 
 
 
