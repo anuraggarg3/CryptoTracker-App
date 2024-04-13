@@ -6,6 +6,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { CartesianChart,Line,useChartPressState  } from "victory-native";
 import { Circle, useFont } from "@shopify/react-native-skia";
 import Animated, { useAnimatedProps } from 'react-native-reanimated';
+import FastImage from 'react-native-fast-image';
 Animated.addWhitelistedNativeProps({text:true});
 const AnimatedTextInput=Animated.createAnimatedComponent(TextInput);
 const CryptocoinDetailscreen = () => {
@@ -112,6 +113,11 @@ const CryptocoinDetailscreen = () => {
   return (
     <LinearGradient colors={['#307ABB', '#5249C7', "#6035CC", "#682ACF", "#6E21D1"]} style={{flex:1}} 
     locations={[0.2, 0.45, 0.75, 0.85, 1]}>
+        { (isLoading)?<View style={{backgroundColor:'#5249C7',justifyContent:'center',flex:1,alignItems:'center'}}>
+      <FastImage
+      source={require('../images/chartloader.gif')}
+      style={{ width: 300, height: 300 }} 
+    /></View>:<>
       <View style={styles.topbar}>
       <TouchableOpacity style={{flex:0.15,marginTop:8,}} onPress={backtohome} >
        <AntDesign name="leftcircle" size={36} color={"white"}/>
@@ -120,7 +126,6 @@ const CryptocoinDetailscreen = () => {
         <Text style={{fontSize:24,fontWeight:'400',color:'white'}}>{data.name}</Text>
       </View>
       </View>
-        { (isLoading)?<></>:
         <View style={{ height: 300 }}>
         {
         (isActive)?
@@ -180,7 +185,7 @@ const CryptocoinDetailscreen = () => {
         <Text style={styles.buttontext}>Year</Text></TouchableOpacity>
       </View>
     </View>
-    }
+    </>}
     </LinearGradient>
   )
 }
@@ -223,5 +228,12 @@ topbar: {
   buttontext:{
     color:'white',
     fontWeight:'bold',
+  },
+  image:{
+    height:300,
+    width:300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight:30,
   }
 })

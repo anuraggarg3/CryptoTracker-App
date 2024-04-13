@@ -9,8 +9,8 @@ const NewsLoader = () => {
     >
     
       <View style={styles.container}>
+        <Text style={styles.content}>News at your fingertips!</Text>
         <Image source={require('../images/loader.png')} style={styles.image}/>
-        <Text style={styles.content}>News at your fingertips</Text>
       </View>
   </LinearGradient>
   )
@@ -33,11 +33,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     },
     content: {
-      marginTop:14,
-      fontSize: 18,
-      paddingHorizontal: 50,
+      // marginTop:14,
+      fontSize: 25,
+      marginBottom:40,
+      // paddingHorizontal: 50,
       textAlign: 'center',
       color: 'white',
+      fontWeight:'800'
   },
     image:{
       height:300,

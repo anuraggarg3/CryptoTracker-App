@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet,Image } from 'react-native';
+import { View, Text, TextInput, FlatList, StyleSheet,Image, TouchableOpacity } from 'react-native';
 import coinData from './data.json'
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +16,10 @@ const SearchScreen = () => {
     setSearchQuery(text);
     setSearchResults(filteredCoins);
   };
-
+  const navigation = useNavigation();
+  const detailcoin=(data)=>{
+    navigation.navigate('CryptoDetail',{data:data});
+  }
   return (
     <LinearGradient colors={['#307ABB', '#5249C7', "#6035CC", "#682ACF", "#6E21D1"]} 
     style={{flex:1,paddingHorizontal:20,paddingTop:20,}} locations={[0.2, 0.45, 0.7, 0.85, 1]}>
@@ -31,13 +35,13 @@ const SearchScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-            <View style={styles.container}>
+            <TouchableOpacity style={styles.container}  onPress={()=>detailcoin(item)} activeOpacity={0.8}>
             <Image source={{ uri: item.image }} style={styles.coinImage} />
             <View style={styles.infoContainer}>
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.symbol}>{item.symbol}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </LinearGradient>

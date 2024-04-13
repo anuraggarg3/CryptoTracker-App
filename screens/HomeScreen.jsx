@@ -6,22 +6,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = () => {
+// const HomeScreen = () => {
+  const HomeScreen = ({route}) => {
+  const {coinData}=route.params;
+  // console.log("homescreen",load)
   const navigation = useNavigation();
-  const [isLoading, setIsLoading] = useState(true);
-  const [coinData, setCoinData] = useState([]);
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const options = { method: 'GET', headers: { accept: 'application/json' } };
-      const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=200&sparkline=false&precision=0&x_cg_demo_api_key=CG-1rLRNK8WiqpUgPwzEJywvWb8', options);
-      const data = await response.json();
-      setCoinData(data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
 
   const topGainers = useMemo(() => coinData.filter(item => item.price_change_percentage_24h >= 0).sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h), [coinData]);
   const topLosers = useMemo(() => coinData.filter(item => item.price_change_percentage_24h <= 0).sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h), [coinData]);
@@ -108,10 +98,6 @@ const HomeScreen = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <View style={{ flex: 1 }}>
           <LinearGradient colors={['#307ABB', '#5249C7', "#6035CC", "#682ACF", "#6E21D1"]} style={styles.container} locations={[0.2, 0.45, 0.7, 0.85, 1]}>
             <TabView
               lazy
@@ -127,8 +113,7 @@ const HomeScreen = () => {
             />
           </LinearGradient>
         </View>
-      )}
-    </View>
+      
   );
 };
 

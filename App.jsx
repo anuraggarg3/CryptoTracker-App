@@ -5,25 +5,24 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './screens/HomeScreen';
 import Loader from './screens/Loader';
 import Newslistscreen from './screens/Newslistscreen';
 import NewsDetailsscreen from './screens/NewsDetailsscreen';
 import CryptocoinDetailscreen from './screens/CryptocoinDetailscreen';
 import SearchScreen from './screens/SearchScreen';
-import Temp1 from './screens/Temp1';
 
 const HomeStack = createNativeStackNavigator();
 
 function HomeStackScreen({route}) {
   // console.log(set)
-  const {load}=route.params;
-  console.log(load)
+  const {coinData}=route.params;
+  // console.log("homestack",coinData)
+
   return (
     <HomeStack.Navigator screenOptions={{headerShown:false}}>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
+      {/* <HomeStack.Screen name="Home" component={HomeScreen}/> */}
+      <HomeStack.Screen name="Home" component={HomeScreen} initialParams={{coinData:coinData}} />
       <HomeStack.Screen name="CryptoDetail" component={CryptocoinDetailscreen} />
     </HomeStack.Navigator>
   );
@@ -45,12 +44,17 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [load,setload]=useState("true")
+  const [coinData, setCoinData] = useState([]);
   useEffect(() => {
-    setTimeout(() => {
+    const fetchData = async () => {
+      const options = { method: 'GET', headers: { accept: 'application/json' } };
+      const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=200&sparkline=false&precision=0&x_cg_demo_api_key=CG-1rLRNK8WiqpUgPwzEJywvWb8', options);
+      const data = await response.json();
+      setCoinData(data);
       setload(false);
-    }, 200);
-  }, [])
-  
+    };
+    fetchData();
+  }, []);
   return (
     <>
     { (load==="true")? <Loader/> 
@@ -68,7 +72,7 @@ export default function App() {
        }}
       //  initialRouteName='Search'
 >
-        <Tab.Screen name="Market" component={HomeStackScreen} initialParams={{load:load}}
+        <Tab.Screen name="Market" component={HomeStackScreen} initialParams={{coinData:coinData}}
         options={{
           
           tabBarIcon: ({ color, size ,focused}) => (
