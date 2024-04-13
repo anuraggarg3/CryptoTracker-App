@@ -20,10 +20,10 @@ const HomeScreen = () => {
       .then(response => {
         const priceData = response.prices.map(item => ({
           timestamp: new Date(item[0]).toLocaleString('en-IN', {
-            timeZone: 'Asia/Kolkata', // Indian Standard Time (IST)
-            // year: 'numeric',
-            // month: 'numeric',
-            // day: 'numeric',
+            timeZone: 'Asia/Kolkata',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
             second: 'numeric'

@@ -15,11 +15,12 @@ import CryptocoinDetailscreen from './screens/CryptocoinDetailscreen';
 import SearchScreen from './screens/SearchScreen';
 import Temp1 from './screens/Temp1';
 
-
-
 const HomeStack = createNativeStackNavigator();
 
-function HomeStackScreen() {
+function HomeStackScreen({route}) {
+  // console.log(set)
+  const {load}=route.params;
+  console.log(load)
   return (
     <HomeStack.Navigator screenOptions={{headerShown:false}}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
@@ -67,7 +68,7 @@ export default function App() {
        }}
       //  initialRouteName='Search'
 >
-        <Tab.Screen name="Market" component={HomeStackScreen} 
+        <Tab.Screen name="Market" component={HomeStackScreen} initialParams={{load:load}}
         options={{
           
           tabBarIcon: ({ color, size ,focused}) => (

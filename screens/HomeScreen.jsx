@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect,useMemo } from 'react';
 import Loader from './Loader';
 import AntDesign from 'react-native-vector-icons/AntDesign';
